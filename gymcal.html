@@ -1,0 +1,330 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GYM CALCULATOR</title>
+<style>
+    body{
+        background-color:rgb(117, 6, 6);
+        
+    }
+    .header{
+        background-color: antiquewhite;
+        height:20%;
+        width:55%;
+        border-radius: 20px;
+        margin:auto;
+        
+        }
+    header,h1{
+        text-align: center;
+        padding-top: 50;
+
+    }
+    .menu{
+        color: aliceblue;
+        font-size: larger;
+    width: 55%;
+        background-color: rgb(58, 56, 112);
+       border-radius: 20px;
+       height:120px;
+       
+       margin: auto;
+      margin-top: 20px;
+       
+    }
+    .menuinside{
+        padding-top: 23px;
+        padding-left: 30px;
+        color:white(188, 189, 189);
+    }
+    .menuinside select{
+        position: sticky;
+        left:300px;
+        border-radius: 20px;
+        height:30px;
+        font-size: medium;
+        width: 175;
+        color: rgb(116, 7, 30);
+        padding-left: 15px;
+    }
+    #table{
+        background-color: rgb(55, 255, 0);
+        border-radius: 20px;
+       
+        width:55%;
+        margin:auto;
+     margin-top: 20px;
+    }
+    
+    .buttons input{
+        border-radius: 20px;;
+        height:50px;
+        width: 100px;
+       
+         }
+    .buttons{
+        margin-left:63%;
+        margin-top: 20px;
+    }
+
+    
+    #addR{
+        background-color: rgb(103, 240, 82);
+        
+    }
+    #deleteR{
+        background-color: rgb(243, 16, 12);
+    }
+    textarea{
+        border-radius: 20px;
+        height: 50px;
+        width: 200px;
+        border:black 2px solid;
+        font-size: x-large;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 10px;
+        
+    }
+    #tbody input{
+        border-radius: 20px;
+        width:75;
+        height: 50;
+        font-size: x-large;
+        text-align: center;
+}
+    #tbody select{
+        border-radius: 20px;
+        width:150;
+        height: 50;
+        font-size: larger;
+        text-align: center;
+}
+thead{
+    font-size: x-large;
+    
+}
+td{
+    padding: 10px;
+    border: 2px solid black;
+
+}
+#image{
+    width: 1000px;
+    height: 100px;
+    display: flex;
+    left: 0;
+    position: absolute;
+}
+#image img {
+    width: 330px;
+    height: 500px;
+  }
+   
+ 
+
+.additional-row textarea {
+        width: 100%;
+        box-sizing: border-box;
+        resize: none;
+    }
+button{
+    border-radius: 150px;
+    width:50px ;
+    height: 50px;
+    margin-bottom: 10 ;
+    background-color: rgb(184, 179, 171);
+    font-size: xx-large;
+}
+</style>
+</head>
+<body> 
+    
+    <div class="header">
+        <h1>GYM WEIGHT CALCULATOR</h1>
+    </div>
+   
+    <div class="menu">
+        <div class="menuinside"><span>what did you workout today?</span>
+        <select>
+            <option hidden>choose workout</option>
+            <option>chest</option>
+            <option>back</option>
+            <option>shoulders</option>
+            <option>legs</option>
+            <option>triceps and biceps</option>
+        </select>
+        </div>
+        <div class="menuinside"><span>Is there a secondary muscle?</span>
+            <select>
+                <option selected>No</option>
+                <option>triceps</option>
+                <option>biceps</option>
+                <option>trapez</option>
+                <option>abs</option>
+                <option>lower legs</option>
+            </select>
+            </div>
+            <div class="menuinside"><span></span></div>
+    </div>
+ 
+    <div id="tb1">
+        <table id="table" width="500px">
+            <thead id="table1">
+                <tr>
+                    <td>Name of the workout</td>
+                    <td>Sets</td>
+                    <td>reps</td>
+                    <td>weight in KG</td>
+                    <td>Review</td>
+
+
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td><textarea></textarea></td>
+                    <td class="sets"><input onblur="createAdditionalRowsFromInput(this) " id="sets" type="number"></td>
+                    <td class="num"><input type="number"></td>
+                    <td class="num1"><input type="number"></td>
+
+                    <td class="rev">
+                        <select>
+                            <option>EASY</option>
+                            <option>MEDIUM</option>
+                            <option>HARD</option>
+                            <option>VERY HARD</option>
+                        </select>
+                    </td>
+                    <td><button onclick="CMI(this)">+</button><button onclick="CMIr(this)">-</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  
+    <div class="buttons">
+        <input id="addR" type="button" value="Add Row" onclick="addRow()">
+        <input id="deleteR" type="button" value="Delete Row" onclick="deleteLastRow()">
+    </div> 
+  
+    <script>
+      function addRow() {
+        var tableBody = document.getElementById("tbody");
+        var newRow = tableBody.insertRow();
+      
+        var str = '<td><textarea></textarea></td>';
+        str += '<td class="sets"><input type="number" onblur="createAdditionalRowsFromInput(this)"></td>';
+        str += '<td class="num"><input type="number"></td>';
+        str+=   '<td class="num1"><input type="number">KG</td>';
+
+        str += '<td class="rev"><select><option>EASY</option><option>MEDIUM</option><option>HARD</option><option>VERY HARD</option></select></td>';
+      str+=`<td><button onclick="CMI(this)">+</button><button onclick="CMIr(this)">-</button></td>`
+        newRow.innerHTML = str;
+        
+      }
+      function deleteLastRow() {
+            var tableBody = document.getElementById("tbody");
+            var numRows = tableBody.rows.length;
+      
+            if (numRows > 1) {
+              tableBody.deleteRow(numRows - 1);
+            }
+          }
+      function createAdditionalRowsFromInput(input) {
+            var setsInput = parseInt(input.value) || 0;
+            var parentRow = input.parentNode.parentNode;
+            var setsCell = parentRow.getElementsByClassName("sets")[0];
+            var numCell = parentRow.getElementsByClassName("num")[0];
+            var num1Cell = parentRow.getElementsByClassName("num1")[0];
+            var revCell = parentRow.getElementsByClassName("rev")[0];
+      
+            // Clear existing inputs in the sets cell
+            setsCell.innerHTML = '';
+            numCell.innerHTML = '';
+            numCell.innerHTML='';
+            revCell.innerHTML = '';
+      
+            // Create new inputs based on setsInput value for "Sets" and "Number" columns
+            for (var i = 1; i <= setsInput; i++) {
+              var newInput = document.createElement("input");
+              newInput.type = "number";
+              newInput.value=i;
+              setsCell.appendChild(newInput);
+      
+              if (i <= setsInput) {        // Create new inputs based on setsInput value for "Number" column
+              if (i <= setsInput) {
+                var newNumberInput = document.createElement("input");
+                newNumberInput.type = "number";
+                numCell.appendChild(newNumberInput);
+              }
+              if (i <= setsInput) {
+                var newNumber1Input = document.createElement("input");
+                newNumber1Input.type = "number";
+                num1Cell.appendChild(newNumber1Input);
+              }
+              // Create new select element for "Review" column
+              var selectElement = document.createElement("select");
+              var options = ["EASY", "MEDIUM", "HARD", "VERY HARD"];
+              for (var j = 0; j < options.length; j++) {
+                var option = document.createElement("option");
+                option.text = options[j];
+                selectElement.add(option);
+              }
+              revCell.appendChild(selectElement);
+            }
+          }
+      }
+      function CMI(input) {
+        var parentRow = input.parentNode.parentNode;
+        var setsCell = parentRow.getElementsByClassName("sets")[0];
+        var numCell = parentRow.getElementsByClassName("num")[0];
+        var num1Cell = parentRow.getElementsByClassName("num1")[0];
+        var revCell = parentRow.getElementsByClassName("rev")[0];
+      
+        // Clear existing inputs in the sets cell
+        setsCell.innerHTML += '<input type="number">';
+        numCell.innerHTML += '<input type="number">';
+        num1Cell.innerHTML += '<input type="number">';
+        revCell.innerHTML += `<select>
+                  <option>EASY</option>
+                  <option>MEDIUM</option>
+                  <option>HARD</option>
+                  <option>VERY HARD</option>
+                </select>`;
+      
+      }
+      function CMIr(input) {
+  var parentRow = input.parentNode.parentNode;
+  var setsCell = parentRow.getElementsByClassName("sets")[0];
+  var numCell = parentRow.getElementsByClassName("num")[0];
+  var num1Cell = parentRow.getElementsByClassName("num1")[0];
+
+  var revCell = parentRow.getElementsByClassName("rev")[0];
+
+  // Check if inputs already exist in the sets cell
+  var existingInputs = setsCell.getElementsByTagName("input");
+  var existingSelect = revCell.getElementsByTagName("select");
+
+  if (existingInputs.length > 0 ) {
+    // Remove existing inputs and select
+    while (setsCell.firstChild) {
+      setsCell.firstChild.remove();  
+    numCell.firstChild.remove();
+    num1Cell.firstChild.remove();
+
+
+      break;
+    }
+
+    if (existingSelect.length > 0) {
+      revCell.removeChild(existingSelect[existingSelect.length - 1]);
+    }
+  
+ 
+}
+
+}
+
+      </script>
+      </body>
+      </html>
