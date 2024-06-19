@@ -1,0 +1,1 @@
+This project aims to create a user-friendly bodybuilding training log application. The primary goal is to help bodybuilders easily track their daily training activities, including reps, sets, and weights. What sets this project apart from similar ones is its simplicity and ease of use, making it ideal for users who prefer straightforward tools without unnecessary complexity.
